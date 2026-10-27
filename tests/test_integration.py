@@ -51,13 +51,14 @@ async def test_real_user_and_options_flow(hass, source):
         assert result["type"] == "create_entry"
         assert entry.options["description_template"] == "{date}\n{details}"
 
-async def test_native_and_subscribable_ics_reload_disable_uninstall(hass, source, hass_client):
+async def test_native_and_subscribable_ics_reload_disable_uninstall(hass, source, hass_client, hass_client_no_auth):
     entry = await setup(hass, public_feed=True, show_sun=False, title_template="{location}: {icon} {high}{unit}/{low}{unit}", description_template="Forecast for {date}\n{details}")
     state = hass.states.get("calendar.weather_calendar")
     assert state.state == "on"
     client = await hass_client()
     path = state.attributes["subscription_path"]
-    response = await client.get(path)
+    anonymous = await hass_client_no_auth()
+    response = await anonymous.get(path)
     assert response.status == 200
     ics = Calendar.from_ical(await response.text())
     events = ics.walk("VEVENT")

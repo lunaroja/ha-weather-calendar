@@ -44,7 +44,8 @@ class WeatherCalendarCoordinator(DataUpdateCoordinator):
             try:
                 async with session.get(url, params={**params, **fields}, timeout=ClientTimeout(total=15)) as response:
                     response.raise_for_status()
-                    return await response.json()
+                    payload = await response.json()
+                    return payload if isinstance(payload, dict) else None
             except (ClientError, TimeoutError, ValueError):
                 # Do not log URLs containing the configured coordinates.
                 _LOGGER.warning("Weather Calendar dashboard supplement temporarily unavailable")
