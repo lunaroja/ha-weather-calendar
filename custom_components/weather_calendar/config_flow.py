@@ -15,7 +15,8 @@ def schema(values):
         vol.Required("days", default=values["days"]): vol.All(vol.Coerce(int), vol.Range(min=1, max=16)),
         vol.Required("temperature_unit", default=values["temperature_unit"]): vol.In(["source", "°F", "°C"]),
         vol.Required("temperature_order", default=values["temperature_order"]): vol.In(["low_high", "high_low"]),
-        **{vol.Optional(key, default=values[key]): str for key in ("title_template", "description_template")},
+        vol.Optional("title_template", default=values["title_template"]): str,
+        vol.Optional("description_template", default=values["description_template"]): selector.TextSelector(selector.TextSelectorConfig(multiline=True)),
         **{vol.Required(key, default=values[key]): bool for key in ("show_units", "show_details", "show_sun", "dashboard_details", "public_feed")},
     }
     return vol.Schema(fields)

@@ -4,7 +4,7 @@
     "step": {
       "user": {
         "title": "Create weather calendar",
-        "description": "Select an existing daily-forecast weather entity. Optional templates accept {icon}, {condition}, {high}, {low}, {unit}, {location}, {date}, {title} and {details}. Leave blank for standard text. Home sun times and the Open-Meteo supplement use your HA home location; enable only for a source at home. Public ICS exposes the configured name, location and event text without a login. External subscribers require internet-accessible HTTPS Home Assistant. Calendar clients control refresh timing.",
+        "description": "Select an existing daily-forecast weather entity. Optional templates use the documented icon, condition, high, low, unit, location, date, title and details placeholders in braces. See Help for examples. Leave blank for standard text. Home sun times and the Open-Meteo supplement use your HA home location; enable only for a source at home. Public ICS exposes the configured name, location and event text without a login. External subscribers require internet-accessible HTTPS Home Assistant. Calendar clients control refresh timing.",
         "data": {
           "name": "Calendar name",
           "weather_entity": "Daily forecast weather entity",
@@ -32,7 +32,7 @@
     "step": {
       "init": {
         "title": "Configure weather calendar",
-        "description": "Select an existing daily-forecast weather entity. Optional templates accept {icon}, {condition}, {high}, {low}, {unit}, {location}, {date}, {title} and {details}. Leave blank for standard text. Home sun times and the Open-Meteo supplement use your HA home location; enable only for a source at home. Public ICS exposes the configured name, location and event text without a login. External subscribers require internet-accessible HTTPS Home Assistant. Calendar clients control refresh timing.",
+        "description": "Select an existing daily-forecast weather entity. Optional templates use the documented icon, condition, high, low, unit, location, date, title and details placeholders in braces. See Help for examples. Leave blank for standard text. Home sun times and the Open-Meteo supplement use your HA home location; enable only for a source at home. Public ICS exposes the configured name, location and event text without a login. External subscribers require internet-accessible HTTPS Home Assistant. Calendar clients control refresh timing.",
         "data": {
           "name": "Calendar name",
           "weather_entity": "Daily forecast weather entity",
