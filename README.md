@@ -7,6 +7,8 @@ Self-hosted weather forecasts in the calendar app you already use. Choose a Home
 [![Validation](https://github.com/lunaroja/ha-weather-calendar/actions/workflows/validate.yaml/badge.svg)](https://github.com/lunaroja/ha-weather-calendar/actions/workflows/validate.yaml)
 [![Release](https://img.shields.io/github/v/release/lunaroja/ha-weather-calendar)](https://github.com/lunaroja/ha-weather-calendar/releases)
 
+![Real Home Assistant event from a sample London Met.no source](docs/calendar-example.png)
+
 ## Install
 
 Requires Home Assistant **2026.10 or later** and an existing weather entity supporting daily forecasts. Its provider controls coverage, licensing and forecast horizon. No extra provider credentials are needed by this integration. Weather data comes from your selected provider; optional supplements use Open-Meteo internet APIs. Hosting the calendar yourself does not make the forecasts locally generated or cloud-free.
