@@ -1,0 +1,59 @@
+{
+  "title": "Weather Calendar",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Create weather calendar",
+        "description": "Select an existing daily-forecast weather entity. Optional templates accept {icon}, {condition}, {high}, {low}, {unit}, {location}, {date}, {title} and {details}. Leave blank for standard text. Home sun times and the Open-Meteo supplement use your HA home location; enable only for a source at home. Public ICS exposes the configured name, location and event text without a login. External subscribers require internet-accessible HTTPS Home Assistant. Calendar clients control refresh timing.",
+        "data": {
+          "name": "Calendar name",
+          "weather_entity": "Daily forecast weather entity",
+          "location": "Location label (public when feed enabled)",
+          "days": "Forecast days (limited by provider)",
+          "temperature_unit": "Temperature unit",
+          "temperature_order": "Temperature order (low_high or high_low)",
+          "show_units": "Show °F / °C in event titles",
+          "show_details": "Show forecast details",
+          "show_sun": "Include home sunrise and sunset",
+          "public_feed": "Enable public weather-only ICS subscription",
+          "dashboard_details": "Include Open-Meteo home details and local-day fallback",
+          "title_template": "Event title template (optional)",
+          "description_template": "Event description template (optional)"
+        }
+      }
+    },
+    "error": {
+      "daily_forecast_required": "Choose a weather entity that supports daily forecasts.",
+      "empty_name": "Enter a calendar name and location label.",
+      "invalid_template": "Use only the documented plain placeholders, with at most 2000 characters. Expressions, format modifiers and attribute access are not supported."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configure weather calendar",
+        "description": "Select an existing daily-forecast weather entity. Optional templates accept {icon}, {condition}, {high}, {low}, {unit}, {location}, {date}, {title} and {details}. Leave blank for standard text. Home sun times and the Open-Meteo supplement use your HA home location; enable only for a source at home. Public ICS exposes the configured name, location and event text without a login. External subscribers require internet-accessible HTTPS Home Assistant. Calendar clients control refresh timing.",
+        "data": {
+          "name": "Calendar name",
+          "weather_entity": "Daily forecast weather entity",
+          "location": "Location label (public when feed enabled)",
+          "days": "Forecast days (limited by provider)",
+          "temperature_unit": "Temperature unit",
+          "temperature_order": "Temperature order (low_high or high_low)",
+          "show_units": "Show °F / °C in event titles",
+          "show_details": "Show forecast details",
+          "show_sun": "Include home sunrise and sunset",
+          "public_feed": "Enable public weather-only ICS subscription",
+          "dashboard_details": "Include Open-Meteo home details and local-day fallback",
+          "title_template": "Event title template (optional)",
+          "description_template": "Event description template (optional)"
+        }
+      }
+    },
+    "error": {
+      "daily_forecast_required": "Choose a weather entity that supports daily forecasts.",
+      "empty_name": "Enter a calendar name and location label.",
+      "invalid_template": "Use only the documented plain placeholders, with at most 2000 characters. Expressions, format modifiers and attribute access are not supported."
+    }
+  }
+}

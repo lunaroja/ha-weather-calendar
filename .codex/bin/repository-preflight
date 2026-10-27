@@ -1,0 +1,73 @@
+#!/bin/zsh
+
+set -u
+set -o pipefail
+
+second_brain_root="${SECOND_BRAIN_ROOT:-/Users/abraham/src/second-brain}"
+requested_path="${1:-$PWD}"
+failures=0
+
+block() {
+  print -ru2 -- "BLOCKED: $1"
+  failures=$((failures + 1))
+}
+
+sync_checkout() {
+  local label="$1"
+  local repo_root="$2"
+  local branch upstream
+
+  if [[ ! -d "$repo_root/.git" ]]; then
+    block "$label is not a Git checkout: $repo_root"
+    return
+  fi
+
+  branch="$(git -C "$repo_root" symbolic-ref --quiet --short HEAD 2>/dev/null)" || {
+    block "$label is detached: $repo_root"
+    return
+  }
+
+  upstream="$(git -C "$repo_root" rev-parse --abbrev-ref '@{upstream}' 2>/dev/null)" || {
+    block "$label branch $branch has no upstream: $repo_root"
+    return
+  }
+
+  if [[ -n "$(git -C "$repo_root" status --porcelain)" ]]; then
+    git -C "$repo_root" fetch --prune origin >/dev/null || {
+      block "$label is dirty and its origin fetch failed: $repo_root"
+      return
+    }
+    block "$label is dirty; origin was fetched but no pull was attempted: $repo_root"
+    return
+  fi
+
+  if git -C "$repo_root" pull --ff-only; then
+    print -r -- "PASS: $label is synchronized on $branch with $upstream"
+  else
+    block "$label could not fast-forward on $branch from $upstream: $repo_root"
+  fi
+}
+
+target_root="$(git -C "$requested_path" rev-parse --show-toplevel 2>/dev/null)" || {
+  print -ru2 -- "BLOCKED: not inside a Git checkout: $requested_path"
+  exit 1
+}
+
+if [[ -x "$second_brain_root/tooling/bin/install-global-agents" ]]; then
+  "$second_brain_root/tooling/bin/install-global-agents" --check ||
+    block "global Codex instructions are not linked to Second Brain"
+else
+  block "Second Brain bootstrap checker is unavailable: $second_brain_root"
+fi
+
+sync_checkout "Second Brain" "$second_brain_root"
+if [[ "$target_root" != "$second_brain_root" ]]; then
+  sync_checkout "repository" "$target_root"
+fi
+
+if (( failures > 0 )); then
+  print -ru2 -- "repository_preflight=blocked failures=$failures"
+  exit 1
+fi
+
+print -r -- "repository_preflight=ready"

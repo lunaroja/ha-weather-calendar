@@ -1,0 +1,18 @@
+{
+  "domain": "weather_calendar",
+  "name": "Weather Calendar",
+  "codeowners": [
+    "@lunaroja"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "weather",
+    "http"
+  ],
+  "documentation": "https://github.com/lunaroja/ha-weather-calendar",
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "version": "1.4.0",
+  "issue_tracker": "https://github.com/lunaroja/ha-weather-calendar/issues",
+  "integration_type": "service"
+}
